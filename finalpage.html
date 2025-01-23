@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metric: Dimensional Accuracy</title>
+    <style>
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            font-size: 18px;
+            background-image: url("background.png");
+            background-size: cover; /* Make the image cover the entire page */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; 
+        }
+
+        .header {
+            background-color: #c69c6d;
+            color: white;
+            padding: 15px;
+            position: relative;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 500;
+        }
+        .logo {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left:20px
+  }
+
+        .go-back {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .block {
+            background-color: #fdd384;
+            border-radius: 5px;
+            padding: 25px;
+            width: 80%;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header"> 
+        <img src="iitdlogo.png" alt="IIT Delhi Logo" class="logo">
+        Indian Institute Of Technology Delhi
+        
+    </div>
+    <button class="back-button" onclick="goBack()">⬅ Go Back</button>
+
+    <div class="container">
+        <div class="block"><strong>Metric:</strong> Dimensional Accuracy</div>
+        <div class="block"><strong>Definition:</strong> The Assessment Of Deviations In Size And Shape.</div>
+        <div class="block">
+            <strong>Evaluation Process:</strong> By Measuring The Dimensions Of The Physical Prototypes. The Measured Dimensions Of The Physical Prototypes Are Compared With The CAD Model To Evaluate The Accuracy.
+        </div>
+        <div class="block">
+            <strong>Examples:</strong> CAD Model: 10*10*10 Cm, Physical Prototype: 9.8*9.9*10.1 Cm, Deviation: 0.2*0.1*-0.1 Cm
+        </div>
+        <div class="block">
+            <strong>Reference:</strong> Ferreira, J. C., Santos, E., Madureira, H., And Castro, J., 2006, "Integration Of VP/RP/RT/RE/RM For Rapid Product And Process Development," Rapid Prototyp J, 12(1), Pp. 18-25.
+        </div>
+    </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>
