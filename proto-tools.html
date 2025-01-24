@@ -99,10 +99,33 @@
     
         const urlParams = new URLSearchParams(window.location.search);
         const proto = urlParams.get('proto');
+        const category = urlParams.get('category');
+        let tools = [];
 
-const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim());
-const tools = [...new Set(relevantData.map(entry => entry["Prototyping tools"]))];
+        if(!proto){
+            tools = data.map(entry => entry["Prototyping tools"]);
+            tools = [...new Set(tools)];
 
+        }
+        else{
+            if(!category){      
+                const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim());
+                tools = [...new Set(relevantData.map(entry => entry["Prototyping tools"]))];
+            }
+            else{
+                if(proto === 'null'){
+                    const relevantData = data.filter(entry => entry["Evaluation categories"]?.toLowerCase().trim() === category.toLowerCase().trim());
+                    tools = [...new Set(relevantData.map(entry => entry["Prototyping tools"]))];
+                }
+                else{
+                const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim()&&
+                entry["Evaluation categories"]?.toLowerCase().trim() === category.toLowerCase().trim());
+                tools = [...new Set(relevantData.map(entry => entry["Prototyping tools"]))];
+                }
+            }
+            
+
+        }
 
         const toolContainer = document.getElementById('toolContainer');
     
@@ -113,7 +136,10 @@ const tools = [...new Set(relevantData.map(entry => entry["Prototyping tools"]))
     
             // Redirect to the Evaluation Category page
             button.addEventListener('click', () => {
-                window.location.href = `evalcategory.html?proto=${proto}&tool=${tool}`;
+                if(!category)
+                    window.location.href = `evalcategory.html?proto=${proto}&tool=${tool}`;
+                else
+                    window.location.href = `metric.html?proto=${proto}&tool=${tool}&category=${category}`;
             });
     
             toolContainer.appendChild(button);

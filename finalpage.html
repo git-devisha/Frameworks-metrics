@@ -93,10 +93,15 @@
 
         // Retrieve the query parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const selectedPrototype = decodeURIComponent(urlParams.get("proto"));
+        let selectedPrototype = decodeURIComponent(urlParams.get("proto"));
         const selectedCategory = decodeURIComponent(urlParams.get("category"));
         const selectedTool = decodeURIComponent(urlParams.get("tool"));
         const selectedMetric = decodeURIComponent(urlParams.get("metric"));
+
+        if(selectedPrototype === "null"){
+            selectedPrototype = "Physical";
+        }
+
         console.log("Selected Prototype: ", selectedPrototype);
         console.log("Selected Category: ", selectedCategory);
         console.log("Selected Tool: ", selectedTool);

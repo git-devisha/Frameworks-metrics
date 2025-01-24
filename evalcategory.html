@@ -101,12 +101,38 @@
         const urlParams = new URLSearchParams(window.location.search);
         const toolName = urlParams.get('tool');
         const proto = urlParams.get('proto');
+        let evaluationCategories=[];
 
-        const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim()&&
-        entry["Prototyping tools"]?.toLowerCase().trim() === toolName.toLowerCase().trim()
-    );
-        const evaluationCategories = [...new Set(relevantData.map(entry => entry["Evaluation categories"]))];
+        if(proto === undefined || proto===null || proto === "null"){
+            if(!toolName){
+                evaluationCategories = [...new Set(data.map(entry => entry["Evaluation categories"]))];
+
+            }else{
+
+                const relevantData = data.filter(entry => entry["Prototyping tools"]?.toLowerCase().trim() === toolName.toLowerCase().trim());
+            evaluationCategories = [...new Set(relevantData.map(entry => entry["Evaluation categories"]))];
+            console.log(evaluationCategories);
+            }
+        }
+        else
+        {
+            if(!toolName){
+                const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim()
+        );
+            evaluationCategories = [...new Set(relevantData.map(entry => entry["Evaluation categories"]))];
+        
+            }
+            else{
+                const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim()&&
+            entry["Prototyping tools"]?.toLowerCase().trim() === toolName.toLowerCase().trim()
+        );
+             evaluationCategories = [...new Set(relevantData.map(entry => entry["Evaluation categories"]))];
+        
     
+            }
+    
+            
+        }
 
 
 
@@ -127,7 +153,11 @@
 
             // Add a click event for each category (extend functionality as needed)
             button.addEventListener('click', () => {
-                window.location.href = `metric.html?proto=${encodeURIComponent(proto)}&tool=${encodeURIComponent(toolName)}&category=${encodeURIComponent(category)}`;
+                if(!toolName){
+                    window.location.href = `proto-tools.html?proto=${encodeURIComponent(proto)}&category=${encodeURIComponent(category)}`;
+                }else{
+                    window.location.href = `metric.html?proto=${encodeURIComponent(proto)}&tool=${encodeURIComponent(toolName)}&category=${encodeURIComponent(category)}`;
+                }
             });
 
             evaluationContainer.appendChild(button);

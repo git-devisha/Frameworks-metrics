@@ -98,13 +98,23 @@
         const toolName = urlParams.get('tool');
         const categoryName = urlParams.get('category');
         const proto = urlParams.get('proto');
+let metrics=[];
+        if(!proto || proto === 'null'){
+            const relevantData = data.filter(entry => entry["Prototyping tools"]?.toLowerCase().trim() === toolName.toLowerCase().trim()&&
+            entry["Evaluation categories"]?.toLowerCase().trim() === categoryName.toLowerCase().trim()
+        );
+            metrics = [...new Set(relevantData.map(entry => entry["Metric"]))];
+        }
+        else{
+            const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim()&&
+            entry["Prototyping tools"]?.toLowerCase().trim() === toolName.toLowerCase().trim()&&
+            entry["Evaluation categories"]?.toLowerCase().trim() === categoryName.toLowerCase().trim()
+        );
+            metrics = [...new Set(relevantData.map(entry => entry["Metric"]))];
+        
 
-        const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim()&&
-        entry["Prototyping tools"]?.toLowerCase().trim() === toolName.toLowerCase().trim()&&
-        entry["Evaluation categories"]?.toLowerCase().trim() === categoryName.toLowerCase().trim()
-    );
-        const metrics = [...new Set(relevantData.map(entry => entry["Metric"]))];
-    
+        }
+
 
 
         // Define metrics

@@ -1,7 +1,7 @@
 
 const data = [
      {
-      "Kinds of protoype": "Physical",
+      "Kinds of protoype": "Physical ",
       "Evaluation categories": "Appearance",
       "Prototyping tools": "AM\/3D-printers",
       "Metric": "Appearance",
@@ -10,7 +10,7 @@ const data = [
       "Reference": "Wall, M. B., Ulrich, K. T., and Flowers, W. C., 1992, “Evaluating Prototyping Technologies for Product Design,” Res Eng Des, 3(3), pp. 163–177."
      },
      {
-      "Kinds of protoype": "Physical",
+      "Kinds of protoype": "Physical ",
       "Evaluation categories": "Appearance",
       "Prototyping tools": "Cardboard",
       "Metric": "Aesthetics",
