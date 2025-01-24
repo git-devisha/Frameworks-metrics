@@ -97,13 +97,29 @@
 
     <div class="container">
         <div class="title">KIND OF PROTOTYPE<div>
-        <button class="button"><a href="proto-tools.html" >Physical </a> </button>
-        <button class="button"><a href="evalcategory.html" >Virtual</a></button>
+        <div class="protocontainer"></div>
     </div>
     <script>
         function goBack() {
             window.history.back();
         }
+
+        const protocontainer = document.querySelector('.protocontainer');
+
+        const protos = [
+            "Physical","Virtual"
+        ]
+
+        protos.forEach(proto => {
+            const button = document.createElement('button');
+            button.classList.add('button');
+            button.innerText = proto;
+            button.onclick = () => {
+                window.location.href = `physical.html?proto=${proto}`;
+            }
+            protocontainer.appendChild(button);
+        });
+
     </script>
 
 </body>

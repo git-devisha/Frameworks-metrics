@@ -85,29 +85,41 @@
 
     <h2 style="text-align: center; margin-top: 20px;">PROTOTYPING TOOLS</h2>
 
-    <div class="container">
-        <button class="button">AM/3D Printers</button>
-        <button class="button">Hand Tools</button>
-        <button class="button">Molding</button>
-        <button class="button">Cardboard</button>
-        <button class="button">Laser Cutter</button>
-        <button class="button">Paper</button>
-        <button class="button">Clay</button>
-        <button class="button">LEGO Kits</button>
-        <button class="button">Ply/Rubber Wood</button>
-        <button class="button">CNC</button>
-        <button class="button">Metallic</button>
-        <button class="button">Plastic/PVC</button>
-        <button class="button">Foam</button>
-        <button class="button">Conventional</button>
-        <button class="button">Junk Modelling</button>
-        <button class="button">Mixed Reality With Physical Prototypes</button>
+
+    <div class="container" id="toolContainer">
+        <!-- Buttons will be dynamically generated here -->
     </div>
+
+    <script src="data.js"></script>
+
     <script>
         function goBack() {
             window.history.back();
         }
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const proto = urlParams.get('proto');
+
+const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim());
+const tools = [...new Set(relevantData.map(entry => entry["Prototyping tools"]))];
+
+
+        const toolContainer = document.getElementById('toolContainer');
+    
+        tools.map(tool => {
+            const button = document.createElement('button');
+            button.className = 'button';
+            button.textContent = tool;
+    
+            // Redirect to the Evaluation Category page
+            button.addEventListener('click', () => {
+                window.location.href = `evalcategory.html?proto=${proto}&tool=${tool}`;
+            });
+    
+            toolContainer.appendChild(button);
+        });
     </script>
+    
 
 </body>
 </html>

@@ -85,23 +85,46 @@
 
     <h2 style="text-align: center; margin-top: 20px;">METRIC</h2>
 
-    <div class="container">
-        <button class="button">Form</button>
-        <button class="button">Geometric</button>
-        <button class="button">Dimensional Accuracy</button>
-        <button class="button">Size</button>
-        <button class="button"> Shape</button>
-        <button class="button">Physical Dimensions</button>
-        <button class="button">Geometry Deviations</button>
-        <button class="button">LEGO Kits</button>
-        <button class="button">Metrology control</button>
-        <button class="button">Footprint & Size</button>
-        <button class="button">Geometry Complexity</button>
+    <div class="container" id="metricContainer">
+        
     </div>
+    <script src="data.js"></script>
     <script>
         function goBack() {
             window.history.back();
         }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const toolName = urlParams.get('tool');
+        const categoryName = urlParams.get('category');
+        const proto = urlParams.get('proto');
+
+        const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim()&&
+        entry["Prototyping tools"]?.toLowerCase().trim() === toolName.toLowerCase().trim()&&
+        entry["Evaluation categories"]?.toLowerCase().trim() === categoryName.toLowerCase().trim()
+    );
+        const metrics = [...new Set(relevantData.map(entry => entry["Metric"]))];
+    
+
+
+        // Define metrics
+       
+
+        // Display the metrics
+        const metricContainer = document.getElementById('metricContainer');
+        metrics.map(metric => {
+            const button = document.createElement('button');
+            button.className = 'button';
+            button.textContent = metric;
+
+            // Add a click event for each metric (extend functionality as needed)
+            button.addEventListener('click', () => {
+                window.location.href = `finalpage.html?proto=${encodeURIComponent(proto)}&tool=${encodeURIComponent(toolName)}&category=${encodeURIComponent(categoryName)}&metric=${encodeURIComponent(metric)}`;
+            });
+
+            metricContainer.appendChild(button);
+        });
+
     </script>
 
 </body>

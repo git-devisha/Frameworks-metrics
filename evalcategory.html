@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVALUATION CATEGORY</title>
     <style>
-        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -13,9 +13,11 @@
             background-color: #f5f5f5;
             font-size: 18px;
             background-image: url("background.png");
-            background-size: cover; /* Make the image cover the entire page */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; 
+            background-size: cover;
+            /* Make the image cover the entire page */
+            background-position: center;
+            /* Center the background image */
+            background-repeat: no-repeat;
         }
 
         .header {
@@ -27,12 +29,13 @@
             font-size: 30px;
             font-weight: 500;
         }
+
         .logo {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    left:20px
-  }
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            left: 20px
+        }
 
         .go-back {
             position: absolute;
@@ -74,38 +77,64 @@
         }
     </style>
 </head>
+
 <body>
 
-    <div class="header"> 
+    <div class="header">
         <img src="iitdlogo.png" alt="IIT Delhi Logo" class="logo">
         Indian Institute Of Technology Delhi
-        
+
     </div>
     <button class="back-button" onclick="goBack()">⬅ Go Back</button>
 
     <h2 style="text-align: center; margin-top: 20px;">EVALUATION CATEGORY</h2>
 
-    <div class="container">
-        <button class="button">Appearance</button>
-        <button class="button">Manufacturability</button>
-        <button class="button">User Interaction & Experience</button>
-        <button class="button">Assembly Fit</button>
-        <button class="button">Originality</button>
-        <button class="button">Cost</button>
-        <button class="button">Part Count</button>
-        <button class="button"> Physical Properties</button>
-        <button class="button">Ergonomics</button>
-        <button class="button">Performance</button>
-        <button class="button">Functionality</button>
-        <button class="button">Geometry</button>
-        <button class="button">Maintainability</button>
-        <button class="button">Time</button>
+    <div class="container" id="evaluationContainer">
     </div>
+    <script src="data.js"></script>
     <script>
         function goBack() {
             window.history.back();
         }
+
+        // Retrieve the selected tool from the query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const toolName = urlParams.get('tool');
+        const proto = urlParams.get('proto');
+
+        const relevantData = data.filter(entry => entry["Kinds of protoype"]?.toLowerCase().trim() === proto.toLowerCase().trim()&&
+        entry["Prototyping tools"]?.toLowerCase().trim() === toolName.toLowerCase().trim()
+    );
+        const evaluationCategories = [...new Set(relevantData.map(entry => entry["Evaluation categories"]))];
+    
+
+
+
+        // Define evaluation categories
+        // const evaluationCategories = [
+        //     "Appearance", "Assembly Fit", "Cost", "Ergonomics", 
+        //     "Functionality", "Maintainability", "Manufacturability", 
+        //     "Originality", "Part Count", "Performance", "Geometry", 
+        //     "Time", "User Interaction & Experience", "Physical Properties"
+        // ];
+
+        // Generate buttons for evaluation categories
+        const evaluationContainer = document.getElementById('evaluationContainer');
+        evaluationCategories.map(category => {
+            const button = document.createElement('button');
+            button.className = 'button';
+            button.textContent = category;
+
+            // Add a click event for each category (extend functionality as needed)
+            button.addEventListener('click', () => {
+                window.location.href = `metric.html?proto=${encodeURIComponent(proto)}&tool=${encodeURIComponent(toolName)}&category=${encodeURIComponent(category)}`;
+            });
+
+            evaluationContainer.appendChild(button);
+        });
+
     </script>
 
 </body>
+
 </html>
